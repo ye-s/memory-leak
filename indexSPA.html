@@ -2,33 +2,50 @@
 <html ng-app="app">
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-		<script src="app/components/notes/note.module.js"></script>
-		<script src="app/components/events/events.module.js"></script>
-		<script src="app/app.module.js"></script>
+		<script>
+			angular.module('app', [
+			]).controller('NoteCtrl', function($scope){
+				$scope.note = {
+				};
+				$scope.newNote = {
+					id: '',
+					tag: '',
+					link: '',
+					date: ''
+				};
+				$scope.notes = [];
+
+				$scope.saveNote = function() {
+					$scope.newNote = $scope.note;
+					$scope.notes.push($scope.newNote);
+					$scope.note = {};
+				}
+			});
+		</script>
 		<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"></script>-->
 	</head>
 	<body>
 		<div id="header"></div>
 		<div id="main_cnt">
-			<div id="short_notes" ng-app="app.note">
+			<div id="short_notes" >
 				<div ng-controller="NoteCtrl">
-					<input type="text" ng-model="value"/>
+					<input type="text" ng-model="note.link"/>
  					<button ng-click="saveNote()">Add</button>
 					<table>
 						<tr>
-						    <th>Info</th>
 						    <th>Tags</th>
+						    <th>Info</th>
 						    <th>Date</th>
 						</tr>
-						<tr ng-repeat="note in notes">
-						    <td>{{ note.tag }}</td>
-						    <td>{{ note.link }}</td>
-						    <td>{{ note.date }}</td>
+						<tr ng-repeat="newNote in notes">
+						    <td>{{ newNote.tag }}</td>
+						    <td>{{ newNote.link }}</td>
+						    <td>{{ newNote.date }}</td>
 						</tr>
 					</table>
 				</div>
 			</div>
-			<div id="ftr_events" ng-app="app.events">
+			<div id="ftr_events" >
 			</div>
 		</div>
 		<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>-->

@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html ng-app="app">
 	<head>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>-->
+		<meta name="viewport" content="width=device-width" />
+		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+        
+		<link rel="stylesheet" type="text/css" href="assets/css/calendar.css">
 		<script src="app/app.module.js"></script>
+		<script src="app/components/events/calendar.events.module.js"></script>
 		<!--<script>
 			angular.module('app', [
 			]).controller('NoteCtrl', function($scope){
@@ -54,6 +59,23 @@
 			<div id="ftr_events" >
 			</div>
 		</div>
-		<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>-->
+		<div ng-app="eventCalendar">
+		
+
+			<div ng-controller="calendarDemo">
+				<h1>Calendar Demo</h1>
+				<span>This page demonstrates the use of a calendar control built in Angular JS. It allows the user to choose a date.</span>
+				<span>The calendar itself is an Angular JS directive, and I'm using LESS CSS for some of the more complicated CSS rules. I'm also make use of Moment.js, a library that allows for easier manipulation of time than the standard JavaScript libraries. I highly recommend you check them out.</span>
+				
+				<calendar selected="day"></calendar>
+				
+				<span>Selected date: <b>{{day.format('dddd, MMMM Do YYYY')}}</b></label>
+			</div>
+		</div>
+		<!--<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>-->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.5/less.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.min.js"></script>
 	</body>
 </html>

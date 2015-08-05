@@ -1,9 +1,11 @@
+<!DOCTYPE html>
+
 <html ng-app="demo">
 	<head>
 		<meta name="viewport" content="width=device-width" />
 		<title text="">Angular JS Calendar Demo</title>
 		
-        <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css" />
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         
 		<style type="text/less">
 			body { font-family:Arial; font-size:14px; }
@@ -15,7 +17,6 @@
             
             .vertical-centre (@height) { height:@height; line-height:@height !important; display:inline-block; vertical-align:middle; }
             .border-box { box-sizing:border-box; -moz-box-sizing:border-box; }
-
             @border-colour:#CCC;
             calendar { float:left; display:block; .border-box; background:white; width:300px; border:solid 1px @border-colour; margin-bottom:10px;
                 @secondary-colour:#2875C7;
@@ -43,18 +44,17 @@
                 }
             }
         </style>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-		<script type="text/javascript" src="assets/js/less.min.js"></script>
-		<script type="text/javascript" src="assets/js/underscore-min.js"></script>
-        <script type="text/javascript" src="assets/js/moment.min.js"></script>
+		
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.5/less.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.min.js"></script>
         
 		<script type="text/javascript">
 			var app = angular.module("demo", []);
-
             app.controller("calendarDemo", function($scope) {
                 $scope.day = moment();
             });
-
             app.directive("calendar", function() {
                 return {
                     restrict: "E",
@@ -65,24 +65,19 @@
                     link: function(scope) {
                         scope.selected = _removeTime(scope.selected || moment());
                         scope.month = scope.selected.clone();
-
                         var start = scope.selected.clone();
                         start.date(1);
                         _removeTime(start.day(0));
-
                         _buildMonth(scope, start, scope.month);
-
                         scope.select = function(day) {
                             scope.selected = day.date;  
                         };
-
                         scope.next = function() {
                             var next = scope.month.clone();
                             _removeTime(next.month(next.month()+1).date(1));
                             scope.month.month(scope.month.month()+1);
                             _buildMonth(scope, next, scope.month);
                         };
-
                         scope.previous = function() {
                             var previous = scope.month.clone();
                             _removeTime(previous.month(previous.month()-1).date(1));
@@ -91,11 +86,9 @@
                         };
                     }
                 };
-
                 function _removeTime(date) {
                     return date.day(0).hour(0).minute(0).second(0).millisecond(0);
                 }
-
                 function _buildMonth(scope, start, month) {
                     scope.weeks = [];
                     var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
@@ -106,7 +99,6 @@
                         monthIndex = date.month();
                     }
                 }
-
                 function _buildWeek(date, month) {
                     var days = [];
                     for (var i = 0; i < 7; i++) {

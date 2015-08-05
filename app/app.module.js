@@ -1,4 +1,4 @@
-angular.module('app', ['calendar.events']).controller('NoteCtrl', function($scope){
+angular.module('app', ['eventCalendar']).controller('NoteCtrl', function($scope){
 		$scope.note = {
 			formatTags: function(){
 				if (this.tags != null) {

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+		<script src="app/app.module.js"></script>
+		<!--<script>
+			angular.module('app', [
+			]).controller('NoteCtrl', function($scope){
+				$scope.note = {
+				};
+				$scope.newNote = {
+					id: '',
+					tag: '',
+					link: '',
+					date: ''
+				};
+				$scope.notes = [];
+
+				$scope.saveNote = function() {
+					$scope.newNote = $scope.note;
+					$scope.notes.push($scope.newNote);
+					$scope.note = {};
+				}
+			});
+		</script>-->
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"></script>-->
+	</head>
+	<body>
+		<div id="header"></div>
+		<div id="main_cnt">
+			<div id="short_notes" >
+				<div ng-controller="NoteCtrl">
+					<input type="text" placeholder="comma separated tags" ng-model="note.tags"/>
+					<input type="text" placeholder="link to important memo" ng-model="note.link"/>
+					<input type="text" placeholder="please add description here" ng-model="note.info"/>
+ 					<button ng-click="saveNote()">Add</button>
+ 					<input type="search" ng-model="search" placeholder="Search...">
+					<table>
+						<tr>
+						    <th>Tags</th>
+						    <th>Description</th>
+						    <th>Link</th>
+						    <th>Date</th>
+						</tr>
+						<tr ng-repeat="dataNote in notes | filter:search">
+						    <td>{{ dataNote.formatTags() }}</td>
+						    <td>{{ dataNote.info }}</td>
+						    <td>{{ dataNote.link }}</td>
+						    <td>{{ dataNote.timestamp | date:'medium' }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="ftr_events" >
+			</div>
+		</div>
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>-->
+	</body>
+</html>

@@ -11,6 +11,7 @@ angular.module('app', [
 			id: '',
 			tags: [],
 			link: '',
+			info: '',
 			timestamp: ''
 		};
 		$scope.notes = [];
@@ -28,6 +29,15 @@ angular.module('app', [
 			$scope.dataNote.timestamp = date;
 			$scope.notes.push($scope.dataNote);
 			$scope.note = {};
+			addFormatTags();
+		};
+
+		addFormatTags = function() {
+			$scope.note.formatTags = function() {
+				if (this.tags != null) {
+					return this.tags.join(", ");
+				}
+			}
 		};
 
 	});

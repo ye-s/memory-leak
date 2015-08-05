@@ -34,6 +34,7 @@
 					<input type="text" placeholder="link to important memo" ng-model="note.link"/>
 					<input type="text" placeholder="please add description here" ng-model="note.info"/>
  					<button ng-click="saveNote()">Add</button>
+ 					<input type="search" ng-model="search" placeholder="Search...">
 					<table>
 						<tr>
 						    <th>Tags</th>
@@ -41,7 +42,7 @@
 						    <th>Link</th>
 						    <th>Date</th>
 						</tr>
-						<tr ng-repeat="newNote in notes">
+						<tr ng-repeat="dataNote in notes | filter:search">
 						    <td>{{ dataNote.formatTags() }}</td>
 						    <td>{{ dataNote.info }}</td>
 						    <td>{{ dataNote.link }}</td>

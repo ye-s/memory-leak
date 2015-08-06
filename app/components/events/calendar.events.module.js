@@ -4,9 +4,10 @@ angular.module("eventCalendar", []).controller("calendarDemo", function($scope) 
 				$scope.event = {
 				};*/
             });
-app.filter('findEventByDate', function() {
+angular.module("app").filter('findEventByDate', function() {
     return function(input, date) {
-		var i=0, len=input.length;
+		var i = 0; 
+		var len = input.length;
         for (; i<len; i++) {
             if (+input[i].date == +date) {
                 return input[i];

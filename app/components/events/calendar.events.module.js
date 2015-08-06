@@ -14,6 +14,7 @@ app.filter('findEventByDate', function() {
         }
     return null;
   }
+});  
 angular.module("eventCalendar").directive("calendar", function() {
                 return {
                     restrict: "E",
@@ -28,12 +29,12 @@ angular.module("eventCalendar").directive("calendar", function() {
 						addEvent: function() {
 							var event = $filter('findEventByDate')(this.events, scheduledEvent.date);
 							if (event != null) {
-								   for (var i in events) {
-									 if (events[i] == event) {
+								for (var i in events) {
+								    if (events[i] == event) {
 										events[i].description = scheduledEvent.description;
 										break;
-									 }
-								   }
+									}
+								}
 							} else {
 								this.events.push(scheduledEvent);
 							}

@@ -64,13 +64,12 @@ angular.module("eventCalendar").directive("calendar", function() {
                         };
                     }
                 };
-				function _showEvents(day.date){
+				function _showEvents(day){
 					var searchDate = moment(day.date).format('YYYYMMDD');
 					var event = $filter('findEventByDate')(scope.events, searchDate);
 					scheduledEvent.date = event.date;
 					scheduledEvent.description = event.description;
 				}
-				function
                 function _removeTime(date) {
                     return date.day(0).hour(0).minute(0).second(0).millisecond(0);
                 }

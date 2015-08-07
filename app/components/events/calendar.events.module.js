@@ -3,8 +3,38 @@ angular.module("eventCalendar", []).controller("calendarDemo", function($scope) 
 				/*$scope.events = [];
 				$scope.event = {
 				};*/
+                $scope.selected ="";
+                $scope.events = [];
+                $scope.scheduledEvent = {
+					date: '',
+					description: ''
+				};
+                $scope.addEvent = function() {
+					var event = $scope.findDate($scope.events, scheduledEvent.date);
+					if (event != null) {
+						for (var i in events) {
+						    if (events[i] == event) {
+								events[i].description = scheduledEvent.description;
+								break;
+							}
+						}
+					} else {
+						this.events.push(scheduledEvent);
+					}
+				};
+				$scope.findDate = function(input, date) {
+					var i = 0; 
+					var len = input.length;
+			        for (; i<len; i++) {
+			            if (+input[i].date == +date) {
+			                return input[i];
+			            }
+			        }
+			        return null;
+			   };
+						
             });
-angular.module("app").filter('findEventByDate', function() {
+/*angular.module('eventCalendar').filter('findEventByDate', function() {
     return function(input, date) {
 		var i = 0; 
 		var len = input.length;
@@ -15,12 +45,13 @@ angular.module("app").filter('findEventByDate', function() {
         }
     return null;
   }
-});  
+});  */
 angular.module("eventCalendar").directive("calendar", function() {
                 return {
                     restrict: "E",
                     templateUrl: "templates/calendar.html",
-                    scope: {
+                    selected: "@",
+/*                    scope: {
                         selected: "=",
 						events: [],
 						scheduledEvent: {
@@ -40,6 +71,11 @@ angular.module("eventCalendar").directive("calendar", function() {
 								this.events.push(scheduledEvent);
 							}
 						}
+                    },*/
+                    controller: function($scope) {        
+                        $scope.findDate = function(input, date) {
+                          $scope.$parent.findDate(input, date);
+                        };
                     },
                     link: function(scope) {
                         scope.selected = _removeTime(scope.selected || moment());
@@ -50,7 +86,7 @@ angular.module("eventCalendar").directive("calendar", function() {
                         _buildMonth(scope, start, scope.month);
                         scope.select = function(day) {
                             scope.selected = day.date;
-							_showEvents();						
+							_showEvents(day, scope);						
                         };
                         scope.next = function() {
                             var next = scope.month.clone();
@@ -66,9 +102,10 @@ angular.module("eventCalendar").directive("calendar", function() {
                         };
                     }
                 };
-				function _showEvents(day){
+                /*scope.findDate = $scope.findDate;*/
+				function _showEvents(day, scope){
 					var searchDate = moment(day.date).format('YYYYMMDD');
-					var event = $filter('findEventByDate')(scope.events, searchDate);
+					var event = scope.findDate(scope.events, searchDate);
 					scheduledEvent.date = event.date;
 					scheduledEvent.description = event.description;
 				}

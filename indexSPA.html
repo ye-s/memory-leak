@@ -4,52 +4,68 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
 		<meta name="viewport" content="width=device-width" />
 		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
-        
 		<link rel="stylesheet" type="text/css" href="assets/css/calendar.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/general.css">
+		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
 		<script src="app/app.module.js"></script>
 		<script src="app/components/events/calendar.events.module.js"></script>
 	</head>
 	<body>
-		<div id="header"></div>
-		<div id="main_cnt">
-			<div id="short_notes" >
-				<div ng-controller="NoteCtrl">
-					<input type="text" placeholder="comma separated tags" ng-model="note.tags"/>
-					<input type="text" placeholder="link to important memo" ng-model="note.link"/>
-					<input type="text" placeholder="please add description here" ng-model="note.info"/>
- 					<button ng-click="saveNote()">Add</button>
- 					<input type="search" ng-model="search" placeholder="Search...">
-					<table>
-						<tr>
-						    <th>Tags</th>
-						    <th>Description</th>
-						    <th>Link</th>
-						    <th>Date</th>
-						</tr>
-						<tr ng-repeat="dataNote in notes | filter:search">
-						    <td>{{ dataNote.formatTags() }}</td>
-						    <td>{{ dataNote.info }}</td>
-						    <td>{{ dataNote.link }}</td>
-						    <td>{{ dataNote.timestamp | date:'medium' }}</td>
-						</tr>
-					</table>
+		<div class="wrapper">
+			<div class="header"><div class="logo">Memory Leak</div></div>
+			<div class="main_cnt">
+				<div class="short_notes main_form">
+					<div ng-controller="NoteCtrl">
+						<h2>Memo Notes</h2>
+						<div class=""><span>Take a note! Add link and short description to your notes.</span></div>
+						
+						<div class="inputs form-text "><input type="text" placeholder="comma separated tags" ng-model="note.tags"/></div>
+						<div class="inputs form-text "><input type="text" placeholder="link to important memo" ng-model="note.link"/></div>
+						<div class="inputs form-text  decr"><input type="text" placeholder="please add description here" ng-model="note.info"/>
+	 					<button type="button" class="btn btn-default btn-sm add_btn" ng-click="saveNote()">Add</button></div>
+	 					<div class="inputs form-text  clean search"><input type="search" ng-model="search" placeholder="Search..."></div>
+						<table class="results">
+							<tr>
+							    <th>Tags</th>
+							    <th>Description</th>
+							    <!-- <th>Link</th> -->
+							    <th class="date_clmn">Date</th>
+							</tr>
+							<tr ng-repeat="dataNote in notes | filter:search">
+							    <td>{{ dataNote.formatTags() }}</td>
+							    <td>{{ dataNote.info }}</td>
+							    <!-- <td>{{ dataNote.link }}</td> -->
+							    <td>{{ dataNote.timestamp | date:'medium' }}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="ftr_events main_form" ng-app="eventCalendar">
+					<div ng-controller="calendarDemo">
+						<h2>Future Events</h2>
+						<span>Don't forget you events! Schedule it right now!</span>
+						
+						<calendar selected="day"></calendar>
+						
+						<span class="selected_date">Selected date: {{day.format('dddd, MMMM Do YYYY')}}</label>
+						<input class="form-text" type="text" placeholder="Add your event"/>
+					</div>
 				</div>
 			</div>
-			<div id="ftr_events" >
-			</div>
-		</div>
-		<div ng-app="eventCalendar">
-		
-
-			<div ng-controller="calendarDemo">
-				<h1>Calendar Demo</h1>
-				<span>This page demonstrates the use of a calendar control built in Angular JS. It allows the user to choose a date.</span>
-				<span>The calendar itself is an Angular JS directive, and I'm using LESS CSS for some of the more complicated CSS rules. I'm also make use of Moment.js, a library that allows for easier manipulation of time than the standard JavaScript libraries. I highly recommend you check them out.</span>
-				
-				<calendar selected="day"></calendar>
-				
-				<span>Selected date: <b>{{day.format('dddd, MMMM Do YYYY')}}</b></label>
-			</div>
+			<!-- <div ng-app="eventCalendar">
+			
+	
+				<div ng-controller="calendarDemo">
+					<h1>Calendar Demo</h1>
+					<span>This page demonstrates the use of a calendar control built in Angular JS. It allows the user to choose a date.</span>
+					<span>The calendar itself is an Angular JS directive, and I'm using LESS CSS for some of the more complicated CSS rules. I'm also make use of Moment.js, a library that allows for easier manipulation of time than the standard JavaScript libraries. I highly recommend you check them out.</span>
+					
+					<calendar selected="day"></calendar>
+					
+					<span>Selected date: <b>{{day.format('dddd, MMMM Do YYYY')}}</b></label>
+				</div>
+			</div> -->
 		</div>
 		<!--<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>-->
 		<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>-->

@@ -40,3 +40,16 @@ angular.module('app', ['eventCalendar']).controller('NoteCtrl', function($scope)
 		};
 
 	});
+
+angular.module('app').filter('findEventByDate', function() {
+    return function(input, date) {
+		var i = 0; 
+		var len = input.length;
+        for (; i<len; i++) {
+            if (+input[i].date == +date) {
+                return input[i];
+            }
+        }
+    return null;
+  }
+});
